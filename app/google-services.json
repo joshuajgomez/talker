@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41037000196",
+    "project_id": "talker-e2dfe",
+    "storage_bucket": "talker-e2dfe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41037000196:android:d1e8d83256a4da65bb0f51",
+        "android_client_info": {
+          "package_name": "com.joshgm3z.talker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41037000196-hc0i6hoj30t7f7rdckivcefoc6g34nir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVs2VRhru40sRwi5ZrEIonNTKepRzBeIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41037000196-hc0i6hoj30t7f7rdckivcefoc6g34nir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

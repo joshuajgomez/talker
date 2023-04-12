@@ -13,11 +13,17 @@
         android:theme="@style/Theme.Talker"
         tools:targetApi="31">
         <activity
+            android:name=".UsersActivity"
+            android:exported="false"
+            android:label="@string/title_activity_users"
+            android:theme="@style/Theme.Talker" />
+        <activity
             android:name=".home.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Talker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

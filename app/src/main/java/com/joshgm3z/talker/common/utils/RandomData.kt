@@ -16,10 +16,20 @@ fun getRandomChat(isFrom: Boolean = true, message: String = "Hello guys"): Chat 
     return chat
 }
 
-fun getRandomUser() = User(
+fun getRandomUser(
+    name: String = "Some guy with a reeeeeeeeeeeeally long name #" + Random.nextInt(),
+) = User(
     id = System.currentTimeMillis().toString(),
-    name = "Some guy HJHJHJHK KLKLKL #" + Random.nextInt(),
+    name = name,
     pictureUrl = "link/to/some_pic.jpg"
+)
+
+fun getRandomUserList() = listOf(
+    getRandomUser(),
+    getRandomUser(name = "Josh"),
+    getRandomUser(),
+    getRandomUser(),
+    getRandomUser(),
 )
 
 

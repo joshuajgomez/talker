@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import com.joshgm3z.talker.frx.LoginActivity
 import com.joshgm3z.talker.home.ui.HomeScreen
 import com.joshgm3z.talker.home.ui.theme.TalkerTheme
+import com.joshgm3z.talker.users.UsersActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : ComponentActivity() {
@@ -25,6 +26,10 @@ class HomeActivity : ComponentActivity() {
             val myIntent = Intent(this, LoginActivity::class.java)
             startActivity(myIntent)
         } else {
+            fun onSearchIconClick() {
+                val myIntent = Intent(this, UsersActivity::class.java)
+                startActivity(myIntent)
+            }
             setContent {
                 TalkerTheme {
                     Surface(
@@ -33,7 +38,8 @@ class HomeActivity : ComponentActivity() {
                     ) {
                         HomeScreen(
 //                        homeChatListLive = homeViewModel.homeChatList,
-                            onChatClick = { homeViewModel.onChatClick(it) }
+                            onChatClick = { homeViewModel.onChatClick(it) },
+                            onSearchIconClick = { onSearchIconClick() }
                         )
                     }
                 }

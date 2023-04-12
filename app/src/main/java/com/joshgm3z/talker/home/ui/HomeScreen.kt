@@ -1,22 +1,21 @@
 package com.joshgm3z.talker.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.joshgm3z.talker.chat.ui.isInPreview
@@ -28,23 +27,45 @@ import com.joshgm3z.talker.common.utils.getRandomHomeChatList
 fun HomeScreen(
     homeChatListLive: LiveData<List<HomeChat>> = MutableLiveData(),
     onChatClick: (user: User) -> Unit = {},
+    onSearchIconClick: () -> Unit = {},
 ) {
     Column(modifier = Modifier.background(Color.White)) {
-        HomeHeader()
+        HomeHeader(onSearchIconClick)
         HomeChatList(homeChatListLive, onChatClick)
     }
 }
 
 @Composable
-fun HomeHeader() {
-    Row(
+fun HomeHeader(onSearchIconClick: () -> Unit) {
+    ConstraintLayout(
         modifier = Modifier
             .height(70.dp)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
     ) {
-        Title()
+        val (title, searchIcon) = createRefs()
+        Surface(
+            modifier = Modifier.constrainAs(title) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                bottom.linkTo(parent.bottom)
+                end.linkTo(parent.end)
+            }
+        ) {
+            Title()
+        }
+        Icon(
+            imageVector = Icons.Rounded.Search,
+            contentDescription = "search",
+            modifier = Modifier
+                .constrainAs(searchIcon) {
+                    end.linkTo(parent.end, margin = 10.dp)
+                    top.linkTo(title.top)
+                    bottom.linkTo(title.bottom)
+                }
+                .size(40.dp)
+                .padding(all = 5.dp)
+                .clickable { onSearchIconClick() }
+        )
     }
 }
 

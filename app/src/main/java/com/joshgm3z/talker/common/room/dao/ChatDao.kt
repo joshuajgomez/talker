@@ -13,7 +13,7 @@ interface ChatDao {
     suspend fun insert(chat: Chat)
 
     @Query("select * from Chat where toUserId = :userId or fromUserId = :userId")
-    fun getChatsWithUser(userId: Int): LiveData<List<Chat>>
+    fun getChatsWithUser(userId: String): LiveData<List<Chat>>
 
     @Query("select * from Chat")
     fun getAllChats(): LiveData<List<Chat>>

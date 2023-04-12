@@ -8,6 +8,7 @@ import com.joshgm3z.talker.common.room.TalkerDb
 import com.joshgm3z.talker.common.utils.SharedPref
 import com.joshgm3z.talker.frx.LoginRepository
 import com.joshgm3z.talker.frx.LoginViewModel
+import com.joshgm3z.talker.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -37,5 +38,8 @@ val appModule = module {
     }
     viewModel {
         LoginViewModel(get())
+    }
+    viewModel {
+        HomeViewModel(get(), get())
     }
 }

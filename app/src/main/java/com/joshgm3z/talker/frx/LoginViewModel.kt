@@ -23,7 +23,7 @@ class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() {
         onLoginComplete: () -> Unit,
         onLoginError: (message: String) -> Unit,
     ) {
-        val user = User(-1, username, "")
+        val user = User("", username, "")
         loginRepo.registerUser(
             user,
             onComplete = { onLoginComplete() },

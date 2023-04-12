@@ -27,7 +27,7 @@ class LoginRepository(
         firestoreManager.registerUser(
             user,
             onSuccess = {
-                saveCurrentUserDetails(user)
+                saveCurrentUserDetails(it)
                 onComplete()
             },
             onError = {

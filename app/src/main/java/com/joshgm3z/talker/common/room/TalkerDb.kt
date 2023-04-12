@@ -9,7 +9,7 @@ import com.joshgm3z.talker.common.room.entity.User
 
 @Database(
     entities = [Chat::class, User::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class TalkerDb : RoomDatabase() {

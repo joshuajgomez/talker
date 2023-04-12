@@ -7,6 +7,7 @@ import com.joshgm3z.talker.common.room.entity.User
 class FirestoreManager {
 
     private val collectionUsers = "users"
+    private val fieldId = "id"
     private val fieldName = "name"
     private val fieldPictureUrl = "picture_url"
 
@@ -14,7 +15,7 @@ class FirestoreManager {
 
     fun registerUser(
         user: User,
-        onSuccess: (message: String) -> Unit,
+        onSuccess: (user: User) -> Unit,
         onError: (message: String) -> Unit,
     ) {
         val userMap = hashMapOf(
@@ -22,9 +23,11 @@ class FirestoreManager {
             fieldPictureUrl to user.pictureUrl,
         )
         firestoreDb.collection(collectionUsers)
-            .document()
-            .set(userMap)
-            .addOnSuccessListener { onSuccess("DocumentSnapshot successfully written!") }
+            .add(userMap)
+            .addOnSuccessListener {
+                user.id = it.id
+                onSuccess(user)
+            }
             .addOnFailureListener { e -> onError("Error writing document: " + e.message) }
     }
 

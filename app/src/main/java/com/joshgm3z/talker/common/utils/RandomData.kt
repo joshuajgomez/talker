@@ -8,16 +8,16 @@ import kotlin.random.Random
 fun getRandomChat(isFrom: Boolean = true, message: String = "Hello guys"): Chat {
     val chat = Chat(
         message = message,
-        toUserId = if (isFrom) getRandomUser().id else -1,
+        toUserId = if (isFrom) getRandomUser().id else "",
         sentTime = System.currentTimeMillis()
     )
-    chat.fromUserId = if (isFrom) -1 else getRandomUser().id
+    chat.fromUserId = if (isFrom) "" else getRandomUser().id
     chat.deliveredTime = System.currentTimeMillis() + 10
     return chat
 }
 
 fun getRandomUser() = User(
-    id = Random.nextInt(),
+    id = System.currentTimeMillis().toString(),
     name = "Some guy HJHJHJHK KLKLKL #" + Random.nextInt(),
     pictureUrl = "link/to/some_pic.jpg"
 )

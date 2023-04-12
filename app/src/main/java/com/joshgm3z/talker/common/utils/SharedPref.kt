@@ -20,7 +20,7 @@ class SharedPref(private val context: Context) {
 
     fun getCurrentUser(): User {
         val sharedPreferences = get()
-        val id = sharedPreferences.getInt(keyUserId, -1);
+        val id: String = sharedPreferences.getString(keyUserId, "")!!;
         val name: String = sharedPreferences.getString(keyUserName, "")!!;
         val pictureUrl: String = sharedPreferences.getString(keyUserPicture, "")!!;
         return User(id = id, name = name, pictureUrl = pictureUrl)
@@ -30,7 +30,7 @@ class SharedPref(private val context: Context) {
 
     fun setCurrentUser(user: User) {
         val editor = get().edit()
-        editor.putInt(keyUserId, user.id)
+        editor.putString(keyUserId, user.id)
         editor.putString(keyUserName, user.name)
         editor.putString(keyUserPicture, user.pictureUrl)
         editor.apply()

@@ -5,12 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.joshgm3z.talker.chat.ChatRepository
 import com.joshgm3z.talker.common.room.entity.Chat
 import com.joshgm3z.talker.common.room.entity.User
+import com.joshgm3z.talker.common.utils.SharedPref
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val chatRepo: ChatRepository) : ViewModel() {
+class HomeViewModel(
+    private val chatRepo: ChatRepository,
+    private val sharedPref: SharedPref,
+) : ViewModel() {
 
-    lateinit var homeChatList: ArrayList<HomeChat>
-    lateinit var userList: List<User>
+    private lateinit var homeChatList: ArrayList<HomeChat>
+    private lateinit var userList: List<User>
 
     init {
         viewModelScope.launch {
@@ -21,10 +25,12 @@ class HomeViewModel(private val chatRepo: ChatRepository) : ViewModel() {
         }
     }
 
+    fun isCurrentUserSaved() = sharedPref.isCurrentUserSaved()
+
     private fun updateHomeChatList(chatList: List<Chat>?) {
         chatList?.forEach { chat ->
             var isFound = false
-            val userId = if (chat.fromUserId == -1) chat.toUserId else chat.fromUserId
+            val userId = chat.fromUserId.ifEmpty { chat.toUserId }
             homeChatList.forEachIndexed { index, homeChat ->
                 if (userId == homeChat.user.id) {
                     // user already added. update chat and increment message count
@@ -44,7 +50,7 @@ class HomeViewModel(private val chatRepo: ChatRepository) : ViewModel() {
         }
     }
 
-    private fun getUser(userId: Int): User? {
+    private fun getUser(userId: String): User? {
         userList.forEach {
             if (it.id == userId) {
                 return it

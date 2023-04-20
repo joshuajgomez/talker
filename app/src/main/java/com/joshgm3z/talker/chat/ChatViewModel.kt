@@ -3,12 +3,12 @@ package com.joshgm3z.talker.chat
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joshgm3z.talker.common.TalkerRepository
 import com.joshgm3z.talker.common.room.entity.Chat
 import com.joshgm3z.talker.common.room.entity.User
-import com.joshgm3z.talker.common.utils.getRandomUser
 import kotlinx.coroutines.launch
 
-class ChatViewModel(private val chatRepo: ChatRepository) : ViewModel() {
+class ChatViewModel(private val chatRepo: TalkerRepository) : ViewModel() {
 
     lateinit var chatUser: User
 

@@ -1,4 +1,4 @@
-package com.joshgm3z.talker.users
+package com.joshgm3z.talker.frx.signup
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,20 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.app.ActivityCompat
-import com.joshgm3z.talker.users.ui.UserScreen
-import com.joshgm3z.talker.users.ui.theme.TalkerTheme
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.joshgm3z.talker.frx.signup.ui.theme.TalkerTheme
 
-class UsersActivity : ComponentActivity() {
+class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fun onCloseClick() {
-            ActivityCompat.finishAffinity(this)
-        }
         setContent {
             TalkerTheme {
                 // A surface container using the 'background' color from the theme
@@ -27,21 +22,22 @@ class UsersActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val usersViewModel by viewModel<UsersViewModel>()
-                    UserScreen(
-                        userList = usersViewModel.userList,
-                        onCloseClick = { onCloseClick() },
-                    )
+                    Greeting("Android")
                 }
             }
         }
     }
 }
 
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Hello $name!")
+}
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DefaultPreview2() {
     TalkerTheme {
-        UserScreen()
+        Greeting("Android")
     }
 }

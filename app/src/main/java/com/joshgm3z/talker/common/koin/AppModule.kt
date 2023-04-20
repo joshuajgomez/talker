@@ -1,7 +1,7 @@
 package com.joshgm3z.talker
 
 import androidx.room.Room
-import com.joshgm3z.talker.chat.ChatRepository
+import com.joshgm3z.talker.common.TalkerRepository
 import com.joshgm3z.talker.chat.ChatViewModel
 import com.joshgm3z.talker.common.firestore.FirestoreManager
 import com.joshgm3z.talker.common.room.TalkerDb
@@ -22,19 +22,19 @@ val appModule = module {
             .build()
     }
     single {
-        ChatRepository(get())
-    }
-    viewModel {
-        ChatViewModel(get())
+        FirestoreManager()
     }
     single {
         SharedPref(get())
     }
     single {
-        FirestoreManager()
+        TalkerRepository(get(), get())
     }
     single {
         LoginRepository(get(), get())
+    }
+    viewModel {
+        ChatViewModel(get())
     }
     viewModel {
         LoginViewModel(get())

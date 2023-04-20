@@ -1,6 +1,7 @@
 package com.joshgm3z.talker.common.room.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.joshgm3z.talker.common.room.entity.Chat
 import com.joshgm3z.talker.common.room.entity.User
@@ -13,5 +14,8 @@ interface UserDao {
 
     @Query("select * from User")
     suspend fun getAllUsers(): List<User>
+
+    @Insert()
+    suspend fun addUsers(userList: List<User>)
 
 }

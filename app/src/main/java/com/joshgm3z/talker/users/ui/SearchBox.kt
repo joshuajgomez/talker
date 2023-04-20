@@ -1,5 +1,6 @@
-package com.joshgm3z.talker.users
+package com.joshgm3z.talker.users.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -17,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SearchBox() {
+fun SearchBox(onCloseClick: () -> Unit = {}) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -30,11 +31,12 @@ fun SearchBox() {
             modifier = Modifier
                 .size(40.dp)
                 .padding(all = 5.dp)
+                .clickable { onCloseClick() }
         )
         Spacer(modifier = Modifier.width(5.dp))
         var input by remember { mutableStateOf("") }
         TextField(
-            value = "Someone",
+            value = input,
             onValueChange = { input = it },
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,6 +52,7 @@ fun SearchBox() {
             modifier = Modifier
                 .size(40.dp)
                 .padding(all = 5.dp)
+                .clickable { input = "" }
         )
     }
 }
@@ -59,8 +62,10 @@ fun SearchBox() {
 fun PreviewSearchBox() {
     Column(modifier = Modifier.fillMaxSize()) {
         SearchBox()
-        Surface(modifier = Modifier
-            .fillMaxHeight()
-            .weight(1f)){}
+        Surface(
+            modifier = Modifier
+                .fillMaxHeight()
+                .weight(1f)
+        ) {}
     }
 }

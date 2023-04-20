@@ -1,11 +1,27 @@
-package com.joshgm3z.talker.chat
+package com.joshgm3z.talker.common
 
 import androidx.lifecycle.LiveData
+import com.joshgm3z.talker.common.firestore.FirestoreManager
 import com.joshgm3z.talker.common.room.TalkerDb
 import com.joshgm3z.talker.common.room.entity.Chat
 import com.joshgm3z.talker.common.room.entity.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ChatRepository(private val talkerDb: TalkerDb) {
+class TalkerRepository(
+    private val talkerDb: TalkerDb,
+    private val firestoreManager: FirestoreManager,
+) {
+
+    suspend fun updateUserList() {
+//        firestoreManager.fetchUserList {
+//            withContext(Dispatchers.IO) {
+//                talkerDb.userDao().addUsers(it)
+//            }
+//        }
+    }
 
     fun getChatsWithUser(user: User): LiveData<List<Chat>> =
         talkerDb.chatDao().getChatsWithUser(user.id)

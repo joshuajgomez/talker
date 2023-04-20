@@ -1,58 +1,35 @@
 package com.joshgm3z.talker.frx.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.joshgm3z.talker.home.ui.Title
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.joshgm3z.talker.common.const.ScreenLogin
 
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun LoginScreen(onLoginClick: (username: String) -> Unit = {}) {
+fun LoginScreen(
+    onLoginClick: (username: String) -> Unit = {},
+    onOpenGalleryClick: () -> Unit = {},
+    onTakePhotoClick: () -> Unit = {},
+    onGoBackClick: () -> Unit = {},
+    onSignUpClick: () -> Unit = {},
+    signupStatus: () -> Unit = {},
+) {
     Surface {
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        val navController = rememberNavController()
+        NavHost(
+            navController = navController,
+            startDestination = ScreenLogin.UsernameInput.route
         ) {
-
-            Text(
-                text = "Welcome to",
-                fontSize = 20.sp,
-                fontStyle = FontStyle.Italic
-            )
-
-            Title()
-
-            Spacer(modifier = Modifier.height(60.dp))
-
-            var username by remember { mutableStateOf("") }
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                placeholder = {
-                    Text(text = "Enter username")
-                }
-            )
-
-            Spacer(modifier = Modifier.height(30.dp))
-
-            Button(onClick = { onLoginClick(username) }) {
-                Text(text = "Login")
+            composable(route = ScreenLogin.UsernameInput.route) {
+                UsernameInput(navController = navController)
+            }
+            composable(route = ScreenLogin.Loading.route) {
+                Loading()
             }
         }
     }
-}
-
-@Composable
-@Preview(showSystemUi = true, showBackground = true)
-fun PreviewLoginScreen() {
-    LoginScreen()
 }

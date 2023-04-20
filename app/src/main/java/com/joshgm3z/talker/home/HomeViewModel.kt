@@ -2,14 +2,14 @@ package com.joshgm3z.talker.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joshgm3z.talker.chat.ChatRepository
+import com.joshgm3z.talker.common.TalkerRepository
 import com.joshgm3z.talker.common.room.entity.Chat
 import com.joshgm3z.talker.common.room.entity.User
 import com.joshgm3z.talker.common.utils.SharedPref
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val chatRepo: ChatRepository,
+    private val chatRepo: TalkerRepository,
     private val sharedPref: SharedPref,
 ) : ViewModel() {
 

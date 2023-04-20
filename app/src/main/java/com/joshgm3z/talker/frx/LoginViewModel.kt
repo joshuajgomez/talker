@@ -1,9 +1,12 @@
 package com.joshgm3z.talker.frx
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.joshgm3z.talker.common.room.entity.User
 
 class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() {
+
+    val statusMessage = mutableStateOf("")
 
     fun onLoginClick(
         username: String,
